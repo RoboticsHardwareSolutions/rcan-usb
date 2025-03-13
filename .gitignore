@@ -1,0 +1,7 @@
+/.idea
+/cmake-*
+tests/cmake-*
+/Debug
+/Release
+/build
+/.vscode/settings.json

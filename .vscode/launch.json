@@ -1,0 +1,147 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+
+    "configurations": [     
+        {
+            "name": "Launch Remote jlink",
+            "request": "launch",
+            "type": "cortex-debug",
+            "liveWatch": {
+                "enabled": true,
+                "samplesPerSecond": 4
+            },
+            "cwd": "${workspaceRoot}",
+            "executable": "${workspaceFolder}/build/rplc.elf",
+            "svdFile": "${workspaceFolder}/STM32F765.svd",
+            "servertype": "jlink",
+            "ipAddress": "${input:IPAddressID}",
+            "interface": "swd",
+            "device": "STM32F765ZG",
+            "gdbPath": "arm-none-eabi-gdb",
+            // "preLaunchTask": "CMake: build",
+            "runToMain": true,
+            "runToEntryPoint": "main",
+            "rttConfig": {
+                "enabled": true,
+                "address": "auto",
+                "decoders": [
+                    {
+                        "label": "",
+                        "port": 0,
+                        "type": "console"
+                    }
+                ]
+            },
+            "rtos": "FreeRTOS",
+            "showDevDebugOutput": "none"
+        },
+        {
+            "name": "Attach Remote jlink",
+            "request": "attach",
+            "type": "cortex-debug",
+            "liveWatch": {
+                "enabled": true,
+                "samplesPerSecond": 4
+            },
+            "cwd": "${workspaceRoot}",
+            "executable": "${workspaceFolder}/build/rplc.elf",
+            "svdFile": "${workspaceFolder}/STM32F765.svd",
+            "servertype": "jlink",
+            "ipAddress": "${input:IPAddressID}",
+            "interface": "swd",
+            "device": "STM32F765ZG",
+            "gdbPath": "arm-none-eabi-gdb",
+            "preLaunchTask": "CMake: build",
+            "runToMain": true,
+            "runToEntryPoint": "main",
+            "rttConfig": {
+                "enabled": true,
+                "address": "auto",
+                "decoders": [
+                    {
+                        "label": "",
+                        "port": 0,
+                        "type": "console"
+                    }
+                ]
+            },
+            "rtos": "FreeRTOS",
+            "showDevDebugOutput": "none"
+        },
+        {
+            "name": "Launch jlink",
+            "request": "launch",
+            "type": "cortex-debug",
+            "liveWatch": {
+                "enabled": true,
+                "samplesPerSecond": 4
+            },
+            "cwd": "${workspaceRoot}",
+            "executable": "${workspaceFolder}/build/rplc.elf",
+            "svdFile": "${workspaceFolder}/STM32F765.svd",
+            "servertype": "jlink",
+            "interface": "swd",
+            "device": "STM32F765ZG",
+            "gdbPath": "arm-none-eabi-gdb",
+            "preLaunchTask": "CMake: build",
+            "runToMain": true,
+            "runToEntryPoint": "main",
+            "rttConfig": {
+                "enabled": true,
+                "address": "auto",
+                "decoders": [
+                    {
+                        "label": "",
+                        "port": 0,
+                        "type": "console"
+                    }
+                ]
+            },
+            "rtos": "FreeRTOS",
+            "showDevDebugOutput": "none"
+        },
+        {
+            "name": "Attach jlink",
+            "request": "attach",
+            "type": "cortex-debug",
+            "liveWatch": {
+                "enabled": true,
+                "samplesPerSecond": 4
+            },
+            "cwd": "${workspaceRoot}",
+            "executable": "${workspaceFolder}/build/rplc.elf",
+            "svdFile": "${workspaceFolder}/STM32F765.svd",
+            "servertype": "jlink",
+            "interface": "swd",
+            "device": "STM32F765ZG",
+            "gdbPath": "arm-none-eabi-gdb",
+            "preLaunchTask": "CMake: build",
+            "runToMain": true,
+            "runToEntryPoint": "main",
+            "rttConfig": {
+                "enabled": true,
+                "address": "auto",
+                "decoders": [
+                    {
+                        "label": "",
+                        "port": 0,
+                        "type": "console"
+                    }
+                ]
+            },
+            "rtos": "FreeRTOS",
+            "showDevDebugOutput": "none"
+        }
+    ],    
+
+    "inputs": [
+        {
+            "type": "promptString",
+            "id": "IPAddressID",
+            "description": "IP of robot",
+        }
+    ],
+}
