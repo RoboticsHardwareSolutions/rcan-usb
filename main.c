@@ -1,5 +1,11 @@
-#include "main.h"
+#include "rhs.h"
 #include "rhs_hal.h"
+
+#if defined(RPLC_XL) || defined(RPLC_L)
+#    include "stm32f7xx_hal.h"
+#elif defined(RPLC_M)
+#    include "stm32f1xx_hal.h"
+#endif
 
 void SystemClock_Config(void);
 
@@ -43,9 +49,6 @@ int32_t init_task(void* context)
 
 int main(void)
 {
-    SCB_EnableICache();
-    SCB_EnableDCache();
-
     HAL_Init();
 
     rhs_init();
@@ -65,6 +68,8 @@ int main(void)
     {
     }
 }
+
+#if defined(RPLC_XL) || defined(RPLC_L)
 
 void SystemClock_Config(void)
 {
@@ -108,6 +113,7 @@ void SystemClock_Config(void)
         rhs_crash("SystemClock_Config failed");
     }
 }
+
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
 {
     if (htim->Instance == TIM7)
@@ -115,3 +121,47 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
         HAL_IncTick();
     }
 }
+
+#elif defined(RPLC_M)
+
+void SystemClock_Config(void)
+{
+    RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+    RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+
+    /** Initializes the RCC Oscillators according to the specified parameters
+     * in the RCC_OscInitTypeDef structure.
+     */
+    RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+    RCC_OscInitStruct.HSEState       = RCC_HSE_ON;
+    RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+    RCC_OscInitStruct.HSIState       = RCC_HSI_ON;
+    RCC_OscInitStruct.PLL.PLLState   = RCC_PLL_ON;
+    RCC_OscInitStruct.PLL.PLLSource  = RCC_PLLSOURCE_HSE;
+    RCC_OscInitStruct.PLL.PLLMUL     = RCC_PLL_MUL9;
+    if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+    {
+    }
+
+    /** Initializes the CPU, AHB and APB buses clocks
+     */
+    RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+    RCC_ClkInitStruct.SYSCLKSource   = RCC_SYSCLKSOURCE_PLLCLK;
+    RCC_ClkInitStruct.AHBCLKDivider  = RCC_SYSCLK_DIV1;
+    RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+    RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+
+    if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+    {
+    }
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
+{
+    if (htim->Instance == TIM2)
+    {
+        HAL_IncTick();
+    }
+}
+
+#endif

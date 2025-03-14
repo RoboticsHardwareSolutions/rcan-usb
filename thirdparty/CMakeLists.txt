@@ -11,9 +11,6 @@ target_compile_definitions(freertos_config
         projCOVERAGE_TEST=0
 )
 
-set(FREERTOS_HEAP "4" CACHE STRING "" FORCE)
-set(FREERTOS_PORT "GCC_ARM_CM7" CACHE STRING "" FORCE)
-
 add_subdirectory(freertos)
 
 ####################### RTT lib ############################

@@ -34,10 +34,7 @@ else()
     message(STATUS "No optimization")
 endif()
 
-
-set(LINKER_SCRIPT_NAME STM32F765ZGTX_FLASH.ld)
-
-include_directories(Core/Inc)
+include_directories(core/inc)
 
 set(RPLC_L ON)
 include(thirdparty/rhs/rhs.cmake)
