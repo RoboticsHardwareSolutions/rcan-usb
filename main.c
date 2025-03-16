@@ -14,7 +14,16 @@ void vApplicationStackOverflowHook(TaskHandle_t xTask, char* pcTaskName);
 void vApplicationStackOverflowHook(TaskHandle_t xTask, char* pcTaskName)
 {
     char str[64];
-    sprintf(str, "Stack Overflow in [%s]", pcTaskName);
+    char* p = str;
+    const char* msg = "Stack Overflow in [";
+    while (*msg) {
+        *p++ = *msg++;
+    }
+    while (*pcTaskName) {
+        *p++ = *pcTaskName++;
+    }
+    *p++ = ']';
+    *p = '\0';
     rhs_crash(str);
     /* Run time stack overflow checking is performed if
     configCHECK_FOR_STACK_OVERFLOW is defined to 1 or 2. This hook function is

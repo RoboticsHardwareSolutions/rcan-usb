@@ -36,7 +36,7 @@ endif()
 
 include_directories(core/inc)
 
-set(RPLC_L ON)
+set(RPLC_M ON)
 include(thirdparty/rhs/rhs.cmake)
 
 add_executable(${PROJECT_NAME}.elf
