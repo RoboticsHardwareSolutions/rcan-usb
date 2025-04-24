@@ -28,4 +28,15 @@ target_include_directories(RTT
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/RTT/Config>
 )
 
+####################### USB lib ############################
+if(RPLC_M)
+        add_library(usb_core STATIC libusb_stm32/src/usbd_core.c libusb_stm32/src/usbd_stm32f103_devfs.c)
+        target_compile_definitions(usb_core PUBLIC -DUSB_PMASIZE=512)
+        target_include_directories(usb_core
+                PUBLIC
+                $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/libusb_stm32/inc>
+        )
+endif()
+
+
 add_subdirectory(rhs)

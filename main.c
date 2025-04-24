@@ -13,17 +13,19 @@ void vApplicationStackOverflowHook(TaskHandle_t xTask, char* pcTaskName);
 
 void vApplicationStackOverflowHook(TaskHandle_t xTask, char* pcTaskName)
 {
-    char str[64];
-    char* p = str;
+    char        str[64];
+    char*       p   = str;
     const char* msg = "Stack Overflow in [";
-    while (*msg) {
+    while (*msg)
+    {
         *p++ = *msg++;
     }
-    while (*pcTaskName) {
+    while (*pcTaskName)
+    {
         *p++ = *pcTaskName++;
     }
     *p++ = ']';
-    *p = '\0';
+    *p   = '\0';
     rhs_crash(str);
     /* Run time stack overflow checking is performed if
     configCHECK_FOR_STACK_OVERFLOW is defined to 1 or 2. This hook function is
@@ -135,8 +137,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
 
 void SystemClock_Config(void)
 {
-    RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-    RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+    RCC_OscInitTypeDef       RCC_OscInitStruct = {0};
+    RCC_ClkInitTypeDef       RCC_ClkInitStruct = {0};
+    RCC_PeriphCLKInitTypeDef PeriphClkInit     = {0};
 
     /** Initializes the RCC Oscillators according to the specified parameters
      * in the RCC_OscInitTypeDef structure.
@@ -163,6 +166,12 @@ void SystemClock_Config(void)
     if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
     {
     }
+    // PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USB;
+    // PeriphClkInit.UsbClockSelection    = RCC_USBCLKSOURCE_PLL_DIV1_5;
+    // if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+    // {
+
+    // }
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
