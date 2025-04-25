@@ -5,6 +5,13 @@
   #include <stdint.h>
   extern uint32_t SystemCoreClock;
 #endif
+
+#if defined(RPLC_XL) || defined(RPLC_L)
+  #include "stm32f7xx_hal.h"
+#elif defined(RPLC_M)
+  #include "stm32f1xx_hal.h"
+#endif
+
 #define configENABLE_FPU                         1
 #define configENABLE_MPU                         0
 
@@ -26,6 +33,7 @@
 #define configCHECK_FOR_STACK_OVERFLOW           2
 #define configUSE_RECURSIVE_MUTEXES              1
 #define configUSE_COUNTING_SEMAPHORES            1
+#define configRECORD_STACK_HIGH_ADDRESS          1
 #define configUSE_STATS_FORMATTING_FUNCTIONS     1
 #define configUSE_PORT_OPTIMISED_TASK_SELECTION  0
 
@@ -69,6 +77,11 @@ to exclude the API function. */
 #define configTASK_NOTIFICATION_ARRAY_ENTRIES 3
 
 #define USE_FreeRTOS_HEAP_4
+
+#define configGENERATE_RUN_TIME_STATS    1
+#define portGET_RUN_TIME_COUNTER_VALUE() (DWT->CYCCNT)
+#define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS()
+
 
 /* Cortex-M specific definitions. */
 #ifdef __NVIC_PRIO_BITS
