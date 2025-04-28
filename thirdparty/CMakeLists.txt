@@ -38,5 +38,15 @@ if(RPLC_M)
         )
 endif()
 
+####################### LWIP lib ############################
+if(RPLC_XL)
+        set(LWIP_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lwip)
+        include(${LWIP_DIR}/src/Filelists.cmake)
 
+        add_library(lwip ${lwipnoapps_SRCS})
+        target_include_directories(lwip PUBLIC ${LWIP_DIR}/src/include)
+        target_link_libraries(lwip PUBLIC freertos_kernel lwip_service)
+endif()
+
+####################### RHS core lib ############################
 add_subdirectory(rhs)
