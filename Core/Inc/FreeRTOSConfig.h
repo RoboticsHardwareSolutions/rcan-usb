@@ -17,7 +17,7 @@ extern uint32_t SystemCoreClock;
 #elif defined(RPLC_M)
 #    include "stm32f1xx_hal.h"
 #    ifndef configTOTAL_HEAP_SIZE
-#        define configTOTAL_HEAP_SIZE ((size_t) 20 * 1024)
+#        define configTOTAL_HEAP_SIZE ((size_t) 48 * 1024)
 #    endif
 #endif
 
