@@ -19,6 +19,13 @@ extern uint32_t SystemCoreClock;
 #    ifndef configTOTAL_HEAP_SIZE
 #        define configTOTAL_HEAP_SIZE ((size_t) 48 * 1024)
 #    endif
+#elif defined(STM32F405xx) || defined(STM32F407xx)
+#    include "stm32f4xx_hal.h"
+#    ifndef CMSIS_device_header
+#        define CMSIS_device_header "stm32f4xx.h"
+#    endif /* CMSIS_device_header */
+#else
+#    error "Unsupported STM32 series. It is necessary to define DWT->CYCCNT"
 #endif
 
 #define configENABLE_FPU 1

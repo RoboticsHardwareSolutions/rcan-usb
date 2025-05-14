@@ -2,10 +2,14 @@
 #ifndef __LWIPOPTS__H__
 #define __LWIPOPTS__H__
 
-#include "stm32f7xx_hal.h"
+#if defined(STM32F103xE)
+#    include "stm32f7xx_hal.h"
+#elif defined(STM32F405xx) || defined(STM32F407xx)
+#    include "stm32f4xx_hal.h"
+#endif
 
 #ifdef __cplusplus
- extern "C" {
+extern "C" {
 #endif
 
 /*----- WITH_RTOS enabled (Since FREERTOS is set) -----*/
@@ -21,7 +25,8 @@
 #define MEM_ALIGNMENT 4
 /*----- Value in opt.h for LWIP_ETHERNET: LWIP_ARP || PPPOE_SUPPORT -*/
 #define LWIP_ETHERNET 1
-/*----- Value in opt.h for LWIP_DNS_SECURE: (LWIP_DNS_SECURE_RAND_XID | LWIP_DNS_SECURE_NO_MULTIPLE_OUTSTANDING | LWIP_DNS_SECURE_RAND_SRC_PORT) -*/
+/*----- Value in opt.h for LWIP_DNS_SECURE: (LWIP_DNS_SECURE_RAND_XID | LWIP_DNS_SECURE_NO_MULTIPLE_OUTSTANDING |
+ * LWIP_DNS_SECURE_RAND_SRC_PORT) -*/
 #define LWIP_DNS_SECURE 7
 /*----- Default Value for TCP_MSS: 536 ---*/
 #define TCP_MSS 512
