@@ -11,6 +11,29 @@ target_compile_definitions(freertos_config
         projCOVERAGE_TEST=0
 )
 
+set(FREERTOS_HEAP "4" CACHE STRING "" FORCE)
+
+get_directory_property(COMPILE_OPTS COMPILE_OPTIONS)
+if(COMPILE_OPTS MATCHES "-mcpu=([^ ;]+)")
+        set(TARGET_CPU ${CMAKE_MATCH_1})
+        if(TARGET_CPU STREQUAL "cortex-m3")
+                set(FREERTOS_PORT "GCC_ARM_CM3" CACHE STRING "" FORCE)
+        elseif(TARGET_CPU STREQUAL "cortex-m4")
+                if(COMPILE_OPTS MATCHES "-mfloat-abi=([^ ;]+)")
+                        set(TARGET_FPU ${CMAKE_MATCH_1})
+                        if(TARGET_FPU STREQUAL "hard")
+                                set(FREERTOS_PORT "GCC_ARM_CM4F" CACHE STRING "" FORCE)
+                        else()
+                                set(FREERTOS_PORT "GCC_ARM_CM4_MPU" CACHE STRING "" FORCE)
+                        endif()
+                else()
+                        set(FREERTOS_PORT "GCC_ARM_CM4_MPU" CACHE STRING "" FORCE)
+                endif()
+        elseif(TARGET_CPU STREQUAL "cortex-m7")
+                set(FREERTOS_PORT "GCC_ARM_CM7" CACHE STRING "" FORCE)
+        endif()
+endif()
+
 add_subdirectory(freertos)
 
 ####################### RTT lib ############################

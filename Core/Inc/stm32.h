@@ -1,3 +1,4 @@
+/* This header necessary for usb lib */
 #ifndef _STM32_H_
 #define _STM32_H_
 
@@ -16,6 +17,16 @@
 /* bit value */
 #define _BV(bit)            (0x01 << (bit))
 
-#include "stm32f1xx.h"
+#if defined(STM32F103xE)
+#    include "stm32f1xx.h"
+#    include <stm32f1xx_ll_pwr.h>
+#    include <stm32f1xx_ll_rcc.h>
+#    include <stm32f1xx_ll_gpio.h>
+#elif defined(STM32F405xx) || defined(STM32F407xx)
+#    include "stm32f4xx.h"
+#    include <stm32f4xx_ll_pwr.h>
+#    include <stm32f4xx_ll_rcc.h>
+#    include <stm32f4xx_ll_gpio.h>
+#endif
 
 #endif // _STM32_H_
