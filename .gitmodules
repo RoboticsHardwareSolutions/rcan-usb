@@ -1,12 +1,6 @@
 [submodule "thirdparty/cmsis"]
 	path = thirdparty/cmsis
 	url = https://github.com/ARM-software/CMSIS_5.git
-[submodule "thirdparty/stm32f7_cmsis"]
-	path = thirdparty/stm32f7_cmsis
-	url = https://github.com/STMicroelectronics/cmsis-device-f7.git
-[submodule "thirdparty/stm32f7_hal"]
-	path = thirdparty/stm32f7_hal
-	url = https://github.com/STMicroelectronics/stm32f7xx-hal-driver.git
 [submodule "thirdparty/freertos"]
 	path = thirdparty/freertos
 	url = https://github.com/FreeRTOS/FreeRTOS-Kernel.git
@@ -25,12 +19,6 @@
 [submodule "rlibs/rtimer"]
 	path = rlibs/rtimer
 	url = https://github.com/RoboticsHardwareSolutions/rtimer.git
-[submodule "thirdparty/stm32f1_cmsis"]
-	path = thirdparty/stm32f1_cmsis
-	url = https://github.com/STMicroelectronics/cmsis-device-f1.git
-[submodule "thirdparty/stm32f1_hal"]
-	path = thirdparty/stm32f1_hal
-	url = https://github.com/STMicroelectronics/stm32f1xx-hal-driver.git
 [submodule "thirdparty/libusb_stm32"]
 	path = thirdparty/libusb_stm32
 	url = https://github.com/dmitrystu/libusb_stm32.git
@@ -40,3 +28,9 @@
 [submodule "rlibs/co_stack"]
 	path = rlibs/co_stack
 	url = https://github.com/RoboticsHardwareSolutions/co_stack.git
+[submodule "thirdparty/stm32f4_cmsis"]
+	path = thirdparty/stm32f4_cmsis
+	url = https://github.com/STMicroelectronics/cmsis-device-f4.git
+[submodule "thirdparty/stm32f4_hal"]
+	path = thirdparty/stm32f4_hal
+	url = https://github.com/STMicroelectronics/stm32f4xx-hal-driver.git
